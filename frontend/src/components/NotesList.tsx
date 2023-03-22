@@ -1,15 +1,30 @@
-import { useState } from "react";
-import { Note } from "../models/note";
+import { useEffect, useState } from 'react'
+import { Note as NoteModel } from '../models/note'
+import Note from './Note'
 
+const NotesList: React.FC = () => {
+  const [notes, setNotes] = useState<NoteModel[]>([])
 
-const NotesList:React.FC= () => {
-    const[notes, setNotes] = useState<Note[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responce = await fetch('/api/notes', {
+          method: 'GET',
+        })
+        const notes = await responce.json()
+        setNotes(notes)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchData()
+  }, [])
 
-    return (
-        <div>
-            
-        </div>
-    );
-};
+  return <div>
+    {notes.map((note)=>(
+        <Note note={note} key={note._id}/>
+    ))}
+    </div>
+}
 
-export default NotesList;
+export default NotesList
