@@ -30,3 +30,16 @@ export const createNote = async (note: NoteInput): Promise<Note> => {
   })
   return responce.json()
 }
+export const updateNote = async (noteId: string, note: NoteInput): Promise<Note> => {
+  const responce = await fetchData(`/api/notes/${noteId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body:JSON.stringify(note)
+  })
+  return responce.json()
+}
+export const deleteNote = async (noteId: string) => {
+  await fetchData(`/api/notes/${noteId}`, { method: 'DELETE' })
+}
+
+
