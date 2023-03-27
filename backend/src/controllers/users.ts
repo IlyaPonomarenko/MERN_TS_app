@@ -30,13 +30,16 @@ export const signUp: RequestHandler<unknown, unknown, SingUpBody, unknown> = asy
       throw createHttpError(409, 'Email already taken')
     }
 
+    //Hashing password and creating an entry
     const passwordHashed = await bcrypt.hash(passwordRaw, 10)
     const newUser = await UserModel.create({
       username: username,
       email: email,
       password: passwordHashed,
     })
-
+    
+    //Storing session data
+    req.session.userdId = newUser._id
     res.status(201).json(newUser)
   } catch (error) {
     next(error)
