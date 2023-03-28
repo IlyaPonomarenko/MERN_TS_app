@@ -4,6 +4,7 @@ import { Note as NoteModel } from '../models/note'
 import * as notes_api from '../network/notes_api'
 import CreateOrEditNote from './CreateOrEditNote'
 import Note from './Note'
+import SignUp from './SignUp'
 
 const NotesList: React.FC = () => {
   const [notes, setNotes] = useState<NoteModel[]>([])
@@ -81,6 +82,7 @@ const NotesList: React.FC = () => {
           }}
         />
       )}
+      {true && <SignUp onDismiss={()=>{}} onSignUpSuccess={()=>{}}></SignUp>}
     </Container>
   )
 }
