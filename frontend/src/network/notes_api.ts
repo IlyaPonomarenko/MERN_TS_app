@@ -15,6 +15,43 @@ export const getLoggedInUser = async (): Promise<User> => {
   const responce = await fetchData('/api/users', { method: 'GET' })
   return responce.json()
 }
+export interface SignUpCred {
+  username: string
+  email: string
+  password: string
+}
+
+export const signUp = async (credentials: SignUpCred): Promise<User> => {
+  const responce = await fetchData('/api/users/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(credentials),
+  })
+  return responce.json()
+}
+
+export interface LogInCred {
+  username: string
+  password: string
+}
+
+export const logIn = async (credentials: LogInCred): Promise<User> => {
+  const responce = await fetchData('/api/users/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(credentials),
+  })
+  return responce.json()
+}
+
+export const logOut = async () => {
+  await fetchData('/api/users/logout', { method: 'POST' })
+}
+
 export const getAllNotes = async (): Promise<Note[]> => {
   const responce = await fetchData('/api/notes', { method: 'GET' })
   return responce.json()
