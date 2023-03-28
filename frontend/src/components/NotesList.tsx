@@ -3,6 +3,7 @@ import { Button, Col, Container, Row, Spinner } from 'react-bootstrap'
 import { Note as NoteModel } from '../models/note'
 import * as notes_api from '../network/notes_api'
 import CreateOrEditNote from './CreateOrEditNote'
+import LogIn from './LogIn'
 import Note from './Note'
 import SignUp from './SignUp'
 
@@ -82,7 +83,8 @@ const NotesList: React.FC = () => {
           }}
         />
       )}
-      {true && <SignUp onDismiss={()=>{}} onSignUpSuccess={()=>{}}></SignUp>}
+      {false && <SignUp onDismiss={()=>{}} onSignUpSuccess={()=>{}}></SignUp>}
+      {false && <LogIn onDismiss={()=>{}} onLogInSuccess={()=>{}}></LogIn>}
     </Container>
   )
 }
